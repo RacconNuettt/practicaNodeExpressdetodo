@@ -52,7 +52,7 @@ const deleteProduct = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const data = await fs.readFile('data.json', 'utf8');
+        const data = await fs.readFile('datos.json', 'utf8');
         let productos = JSON.parse(data);
 
         const index = productos.findIndex(prod => prod.id === id);
@@ -61,13 +61,12 @@ const deleteProduct = async (req, res) => {
         }
 
         productos.splice(index, 1);
-        await fs.writeFile('data.json', JSON.stringify(productos, null, 2));
-        res.status(204).send();
+        await fs.writeFile('datos.json', JSON.stringify(productos, null, 2)); 
+        res.status(204).send(); 
     } catch (error) {
         res.status(500).json({ message: 'Error al eliminar el producto', error: error.message });
     }
 };
-
 
 
 module.exports = {
